@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=utf-8" />
+    <title>无标题文档</title>
+    <style>
+        #run
+        {
+            width: 200px;
+            height: 200px;
+            background: blue;
+            filter: alpha(opacity:30);
+            opacity: 0.3;
+            position: absolute;
+        }
+    </style>
+    <script>
+        window.onload = function()
+        {
+
+            var speed = 0;
+            var timer = null;
+            var alpha=30;
+            var oDiv = document.getElementById('run');
+            oDiv.onmouseover = function()
+            {
+                startMove(100);
+            };
+            oDiv.onmouseout = function()
+            {
+                startMove(30);
+            };
+            function startMove(iTarget)
+            {
+                if(iTarget>alpha)
+                {
+                    speed = 1;
+                }
+                else
+                {
+                    speed = -1;
+                }
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    if(alpha==iTarget)
+                    {
+                        clearInterval(timer);
+                    }
+                    else
+                    {
+                    alpha = alpha +speed;
+                    oDiv.style.filter="alpha(opacity:"+alpha+")";
+                    oDiv.style.opacity = alpha/100;}
+                },30)
+
+            }
+        };
+
+
+
+    </script>
+</head>
+
+<body>
+<div id="run"></div>
+</body>
+</html>
