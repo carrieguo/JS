@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1
+        {
+            width: 100px;
+            height: 200px;
+            background: green;
+            position: absolute;
+            left: -100px;
+        }
+        #div1 span
+        {
+            width: 20px;
+            height: 70px;
+            right: -20px;
+            line-height: 30px;
+            top:30px;
+            background:blue;
+            position: absolute;
+        }
+    </style>
+    <script>
+        var timer=null;
+        window.onload = function()
+        {
+
+            var oDiv = document.getElementById('div1');
+            oDiv.onmouseover = function()
+            {
+                startMove(10,0);
+            };
+            oDiv.onmouseout = function()
+            {
+                startMove(-10,-100)
+            };
+            function startMove(speed,leftvalue)
+            {
+                var oDiv = document.getElementById('div1');
+                clearInterval(timer);
+                timer = setInterval(function()
+                {
+                    if(oDiv.offsetLeft==leftvalue)
+                    {
+                        clearInterval(timer);
+                    }
+                    else
+                    {
+                        oDiv.style.left = oDiv.offsetLeft+speed+"px";
+                    }
+                },30);
+            }
+
+        };
+
+
+
+    </script>
+</head>
+<body>
+<div id="div1"><span>展开</span></div>
+</body>
+</html>
