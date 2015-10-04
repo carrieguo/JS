@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function()
+        {
+            var color = '';
+            var oTab = document.getElementById('table1');
+            var oTr = oTab.tBodies[0].rows;
+            for (var i=0;i<oTr.length;i++)
+            {
+                if(i%2==0)
+                {
+                    oTr[i].style.background="yellow";
+                }
+                oTr[i].onmouseover = function()
+                {
+                    color = this.style.background;
+                    this.style.background = "green";
+                };
+                oTr[i].onmouseout  = function()
+                {
+                    this.style.background = color;
+                };
+            }
+        };
+    </script>
+</head>
+<body>
+<table id="table1" border="1px">
+    <thead>
+    <td>ID</td>
+    <td>姓名</td>
+    <td>年龄</td>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>zhang</td>
+        <td>22</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>张亚楠</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>过过过</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>我是方方</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>吃饭了</td>
+        <td>25</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
