@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function()
+        {
+            var speed=2;
+            var oDiv = document.getElementById('div1');
+            var oul = document.getElementsByTagName('ul')[0];
+            var oli = oul.getElementsByTagName('li');
+            oul.innerHTML = oul.innerHTML+ oul.innerHTML;
+            oul.style.width = oli[0].offsetWidth*oli.length+'px';
+            function Move()
+            {
+                oul.style.left= oul.offsetLeft +speed+'px';
+                if(oul.offsetLeft>0)
+                {
+                    oul.style.left=-oul.offsetWidth/2 +'px';
+                }
+                if(oul.offsetLeft<-oul.offsetWidth/2)
+                {
+                    oul.style.left = 0;
+                }
+            }
+
+            oDiv.onmouseover = function()
+            {
+                clearInterval(Timer);
+            };
+            oDiv.onmouseout = function()
+            {
+                Timer = setInterval(Move,30);
+            };
+            var Timer = setInterval(Move,30);
+            var a = document.getElementsByTagName('a');
+            a[0].onclick= function()
+            {
+              speed = -4;
+            };
+            a[1].onclick = function()
+            {
+              speed = 4;
+            };
+        };
+
+    </script>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+        #div1
+        {
+            width: 1000px;
+            height: 108px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        ul
+        {
+            width: 1000px;
+            height: 108px;
+            position: absolute;
+        }
+        ul li
+        {
+            width: 200px;
+            list-style: none;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <a href="script:;">向左走</a>
+    <a href="script:;">向右走</a>
+    <ul>
+        <li><img src="img/1.jpg" width="200px"></li>
+        <li><img src="img/2.jpg" width="200px"></li>
+        <li><img src="img/3.jpg" width="200px"></li>
+        <li><img src="img/4.jpg" width="200px"></li>
+        <li><img src="img/5.jpg" width="200px"></li>
+    </ul>
+</div>
+</body>
+</html>
