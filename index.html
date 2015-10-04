@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+<script>
+    function Dub(num)
+    {
+        if(num<10)
+        {
+            num = '0'+num;
+        }
+        else
+        {
+            num = ''+num;
+        }
+        return num;
+    }
+    window.onload= setInterval(
+        function ()
+        {
+            var oDate = new Date();
+            var oHours = Dub(oDate.getHours());
+            var oMinute = Dub(oDate.getMinutes());
+            var oSecond = Dub(oDate.getSeconds());
+            var oDiv = document.getElementById("div1");
+            oDiv.innerHTML = "当前时间" + oHours + ":" + oMinute + ":" + oSecond;
+
+        },1000)
+</script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>
