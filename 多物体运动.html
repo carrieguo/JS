@@ -15,7 +15,7 @@
             var oDiv = document.getElementsByTagName('div');
             for (var i=0;i<oDiv.length;i++)
             {
-                //clearInterval(timer);
+                oDiv[i].timer = null;
                 oDiv[i].onmouseover = function()
                 {
                     startMove(this,400);
@@ -26,16 +26,15 @@
                 };
             }
         };
-        var timer = null;
         function startMove(obj,iTarget)
         {
-            clearInterval(timer);
-            timer = setInterval(function(){
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
                 var speed = (iTarget - obj.offsetWidth)/6;
                 speed = speed>0?Math.ceil(speed):Math.floor(speed);
                 if(iTarget == obj.offsetWidth)
                 {
-                    clearInterval(timer);
+                    clearInterval(obj.timer);
                 }
                 else
                 {
