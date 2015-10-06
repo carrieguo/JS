@@ -1,0 +1,78 @@
+<!DOCTYPE html>//用currentstyle和getcomputedstyle解决了offsetwidth物体边框的冲突问题。
+                 //任意运动属性作为参数可变，但是不兼容透明度
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div
+        {
+            width: 200px;
+            height: 200px;
+            background: chartreuse;
+            float: left;
+            margin: 10px;
+        }
+    </style>
+    <script>
+        window.onload = function()
+        {
+            var oDiv = document.getElementsByTagName('div');
+                    oDiv[0].onmouseover=function()
+                    {
+                        startMove(this,'height',400);
+                    };
+                    oDiv[0].onmouseout = function()
+                    {
+                        startMove(this,'height',200);
+                    };
+            oDiv[1].onmouseover =function()
+            {
+                startMove(this,'width',400);
+            };
+            oDiv[1].onmouseout= function()
+            {
+                startMove(this,"width",200);
+            };
+        };
+        function getStyle(obj,name)   //获取非行间样式 currentStyle兼容IE; getComputedStyle兼容FF,Chrome;
+        {
+            if(obj.currentStyle)
+            {
+                return obj.currentStyle[name];
+
+            }
+            else
+            {
+                //document.title=getComputedStyle(obj, false)[name];
+                return getComputedStyle(obj, false)[name];
+            }
+        }
+        function startMove(obj,item,iTarget)
+        {
+
+           //document.title=cur;
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                var cur = parseInt(getStyle(obj,item));
+                var speed = (iTarget-cur)/8;
+                speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                if(iTarget==cur)
+                {
+                    clearInterval(obj.timer);
+                }
+                else
+                {
+
+                    obj.style[item]= cur+speed+'px';
+                }
+                document.title=iTarget+"+"+cur;
+            },30);
+        }
+    </script>
+</head>
+<body>
+<div>变高</div>
+<div>变宽</div>
+</body>
+</html>
