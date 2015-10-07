@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="move.js"></script>
+    <script>
+        function getByClass(oParent,className)   //用className获取元素
+        {
+            var oEle=oParent.getElementsByTagName('*');
+            var oResult=[];                     //一开始写成了oResult[],检查了好久==
+            for(var i=0;i<oEle.length;i++)
+            {
+                if(oEle[i].className==className)
+                oResult.push(oEle[i]);
+            }
+            return oResult;
+        }
+        window.onload=function()
+        {
+            var oDiv= document.getElementById('playimages');
+            var oprev=getByClass(oDiv,'prev')[0];
+            var onext=getByClass(oDiv,'next')[0];
+            var omark_left=getByClass(oDiv,'mark_left')[0];
+            var omark_right=getByClass(oDiv,'mark_right')[0];
+
+            oprev.onmouseover=omark_left.onmouseover= function()
+            {
+                startMove(oprev,'opacity',100);
+            };
+            oprev.onmouseout=omark_left.onmouseout=function()
+            {
+                startMove(oprev,'opacity',0);
+            };
+            onext.onmouseover=omark_right.onmouseover=function()
+            {
+                startMove(onext,'opacity',100);
+            };
+            onext.onmouseout=omark_right.onmouseout=function()
+            {
+                startMove(onext,'opacity',0);
+            };
+        };
+    </script>
+</head>
+
+<body>
+<div id="playimages" class="play">
+    <ul class="big_pic">
+
+        <div class="prev"></div>
+        <div class="next"></div>
+
+        <div class="text">加载图片说明……</div>
+        <div class="length">计算图片数量……</div>
+
+        <a class="mark_left" href="javascript:;"></a>
+        <a class="mark_right" href="javascript:;"></a>
+        <div class="bg"></div>
+
+        <li style="z-index:1;"><img src="images/1.jpg" /></li>
+        <li><img src="images/2.jpg" /></li>
+        <li><img src="images/3.jpg" /></li>
+        <li><img src="images/4.jpg" /></li>
+        <li><img src="images/5.jpg" /></li>
+        <li><img src="images/6.jpg" /></li>
+    </ul>
+    <div class="small_pic">
+        <ul style="width:390px;">
+            <li style="filter: 100; opacity: 1;"><img src="images/1.jpg" /></li>
+            <li><img src="images/2.jpg" /></li>
+            <li><img src="images/3.jpg" /></li>
+            <li><img src="images/4.jpg" /></li>
+            <li><img src="images/5.jpg" /></li>
+            <li><img src="images/6.jpg" /></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
