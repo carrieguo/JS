@@ -70,7 +70,7 @@
                 var cur = 0;
                 if(item=='opacity')
                 {
-                    cur = parseFloat(getStyle(obj,item))*100;
+                    cur = Math.round(parseFloat(getStyle(obj,item))*100);  //四舍五入去掉小数。
                 }
                 else
                 {
