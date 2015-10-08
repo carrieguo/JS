@@ -17,6 +17,7 @@
             }
             return oResult;
         }
+
         window.onload=function()
         {
             var oDiv= document.getElementById('playimages');
@@ -25,6 +26,14 @@
             var omark_left=getByClass(oDiv,'mark_left')[0];
             var omark_right=getByClass(oDiv,'mark_right')[0];
 
+            var obig_pic=getByClass(oDiv,'big_pic')[0];
+            var li_big_pic = obig_pic.getElementsByTagName('li');
+
+            var osmall_pic=getByClass(oDiv,'small_pic')[0];
+            var ul_small_pic=osmall_pic.getElementsByTagName('ul')[0];
+            var li_small_pic = osmall_pic.getElementsByTagName('li');
+
+            //左右切换
             oprev.onmouseover=omark_left.onmouseover= function()
             {
                 startMove(oprev,'opacity',100);
@@ -41,7 +50,96 @@
             {
                 startMove(onext,'opacity',0);
             };
+
+            //大图切换
+            var oindex=2;
+            var now=0;
+            ul_small_pic.style.width=li_small_pic.length*li_small_pic[0].offsetWidth+"px";//ul不够宽，设置小图ul的宽度
+            for(var i=0;i<li_small_pic.length;i++)
+            {
+                li_small_pic[i].index=i;
+                li_small_pic[i].onclick = function()//点击小图，切换大图
+                {
+                    if(now==this.index) return;//解决重复点击小图，大图重复刷新的问题
+                    else
+                    {
+                        now=this.index;
+                        abs();
+                    }
+
+                }
+
+                li_small_pic[i].onmouseover=function()     //鼠标移入小图，透明度变100
+                {
+                    startMove(this,'opacity',100);
+                };
+                li_small_pic[i].onmouseout=function()       //鼠标移出小图，透明度变60
+                {
+                    if(this.index!=now)            //当前移入的小和上次点击的小图不一样时才变透明度
+                    {
+                        startMove(this,'opacity',60);
+                    }
+                };
+            }
+            function abs() //点击小图、点击左右按钮后的效果函数
+            {
+                li_big_pic[now].style.zIndex=oindex++;  //每点击一次，让大图的zIndex层级逐渐变高
+                //大图从上往下展示
+                li_big_pic[now].style.height=0;
+                startMove(li_big_pic[now],'height',320);
+
+                //点击的小图透明度变100，其他小图变为60
+                for(var i=0;i<li_small_pic.length;i++)
+                {
+                    startMove(li_small_pic[i],'opacity',60);
+                }
+                startMove(li_small_pic[now],'opacity',100);
+
+                if(now==0)
+                {
+                    startMove(ul_small_pic,'left',0);
+                }
+                else if(now==li_small_pic.length-1)
+                {
+                    startMove(ul_small_pic,'left',-(now-2)*li_small_pic[0].offsetWidth);
+                }
+                else
+                {
+                    startMove(ul_small_pic,'left',-(now-1)*li_small_pic[0].offsetWidth);
+                }
+
+            }
+            onext.onclick = function()
+            {
+                now++;
+                if(now==li_big_pic.length)
+                {
+                    now=0;
+                }
+                abs();
+            };
+            //自动播放
+            var timer=setInterval(onext.onclick,2000);
+            oDiv.onmouseover= function()
+            {
+                clearInterval(timer);
+            };
+            oDiv.onmouseout = function()
+            {
+                timer=setInterval(onext.onclick,2000);
+            };
+
+            oprev.onclick= function()
+            {
+                now--;
+                if(now<0)
+                {
+                    now=li_big_pic.length-1;
+                }
+                abs();
+            }
         };
+
     </script>
 </head>
 
