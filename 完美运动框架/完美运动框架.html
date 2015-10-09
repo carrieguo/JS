@@ -16,9 +16,8 @@
         window.onload= function ()
         {
             var oDiv = document.getElementById('div1');
-            startMove(oDiv,'width',300,function(){
-                startMove(oDiv,'height',300);
-            });
+            var json ={width:300,height:100};
+            startMove(oDiv,json);
         }
     </script>
 </head>
