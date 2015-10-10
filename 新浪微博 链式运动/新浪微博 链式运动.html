@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #ul1
+        {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            border: 1px black solid;
+            overflow: hidden;
+        }
+        #ul1 li
+        {
+            border-bottom:1px black dashed;
+            margin: 5px 0;
+            filter:alpha(opacity:0);
+            opacity:0;
+        }
+    </style>
+    <script src="move.js"></script>
+    <script>
+        window.onload=function()
+        {
+            var oUl = document.getElementById('ul1');
+            var oTxt = document.getElementById('txt1');
+            var oBt = document.getElementById('btn');
+            var oLi = null;
+            oBt.onclick=function()
+            {
+                oLi=document.createElement('li');
+                oLi.innerHTML=oTxt.value;
+                oTxt.value='';
+               // var oHeight =oLi.offsetHeight;   //oHeight在这里取的值是0
+
+                if(oUl.children.length>0)
+                {
+                    oUl.insertBefore(oLi,oUl.children[0]);
+                }
+                else
+                {
+                    oUl.appendChild(oLi);
+                }
+
+                var oHeight =oLi.offsetHeight;
+                 oLi.style.height=0;
+                alert(oHeight);
+                startMove(oLi,{height:oHeight},function(){
+                    startMove(oLi,{opacity:100});
+                });
+
+            };
+        };
+    </script>
+</head>
+<body>
+<textarea id="txt1" rows="4" cols="40" ></textarea>   //文本框
+<input id="btn" type="button" value="发布">
+<ul id="ul1"></ul>
+</body>
+</html>
