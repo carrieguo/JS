@@ -11,20 +11,49 @@ window.onload=function ()
 	var oDiv = document.getElementById('play');
 	var oLi = oDiv.getElementsByTagName('ol')[0].getElementsByTagName('li');
 	var oUl = oDiv.getElementsByTagName('ul')[0];
+	var now=0;
+	var timer=null;
 	for(var i=0;i<oLi.length;i++)
 	{
 		oLi[i].onclick=function()
 		{
+			now=this.index;
 			for(var j=0;j<oLi.length;j++)
 			{
 				oLi[j].index=j;
 				oLi[j].className='';
 			}
-			this.className='active';
+			oLi[now].className='active';
 			//oUl.style.top=-150*this.index+'px';
-			startMove(oUl,{top:-150*this.index});
+			startMove(oUl,{top:-150*now});
+		};
+		oUl.onmouseover=function()
+		{
+			clearInterval(timer);
+		};
+		oUl.onmouseout=function()
+		{
+			timer=setInterval(next,2000);
 		};
 	}
+
+	function next()
+	{
+		now++;
+		if(now==oLi.length)
+		{
+			now=0;
+		}
+		for(var j=0;j<oLi.length;j++)
+		{
+			oLi[j].index=j;
+			oLi[j].className='';
+		}
+		oLi[now].className='active';
+		//oUl.style.top=-150*this.index+'px';
+		startMove(oUl,{top:-150*now});
+	}
+	timer=setInterval(next,2000);
 };
 </script>
 </head>
@@ -40,11 +69,11 @@ window.onload=function ()
         <li>5</li>
     </ol>
 	<ul>
-		<li><a href="http://www.zhinengshe.com/"><img src="images/1.jpg" alt="广告一" /></a></li>
-		<li><a href="http://www.zhinengshe.com/"><img src="images/2.jpg" alt="广告二" /></a></li>
-		<li><a href="http://www.zhinengshe.com/"><img src="images/3.jpg" alt="广告三" /></a></li>
-		<li><a href="http://www.zhinengshe.com/"><img src="images/4.jpg" alt="广告四" /></a></li>
-		<li><a href="http://www.zhinengshe.com/"><img src="images/5.jpg" alt="广告五" /></a></li>
+		<li><img src="images/1.jpg" alt="广告一" /></li>
+		<li><img src="images/2.jpg" alt="广告二" /></li>
+		<li><img src="images/3.jpg" alt="广告三" /></li>
+		<li><img src="images/4.jpg" alt="广告四" /></li>
+		<li><img src="images/5.jpg" alt="广告五" /></li>
 	</ul>
 </div>
 </body>
