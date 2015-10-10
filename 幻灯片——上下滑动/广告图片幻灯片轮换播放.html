@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+<link href="css.css" rel="stylesheet" type="text/css" />
+<script src="move.js"></script>
+<script>
+window.onload=function ()
+{
+	var oDiv = document.getElementById('play');
+	var oLi = oDiv.getElementsByTagName('ol')[0].getElementsByTagName('li');
+	var oUl = oDiv.getElementsByTagName('ul')[0];
+	for(var i=0;i<oLi.length;i++)
+	{
+		oLi[i].onclick=function()
+		{
+			for(var j=0;j<oLi.length;j++)
+			{
+				oLi[j].index=j;
+				oLi[j].className='';
+			}
+			this.className='active';
+			//oUl.style.top=-150*this.index+'px';
+			startMove(oUl,{top:-150*this.index});
+		};
+	}
+};
+</script>
+</head>
+
+<body>
+
+<div class="play" id="play">
+    <ol>
+    	<li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ol>
+	<ul>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/1.jpg" alt="广告一" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/2.jpg" alt="广告二" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/3.jpg" alt="广告三" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/4.jpg" alt="广告四" /></a></li>
+		<li><a href="http://www.zhinengshe.com/"><img src="images/5.jpg" alt="广告五" /></a></li>
+	</ul>
+</div>
+</body>
+</html>
