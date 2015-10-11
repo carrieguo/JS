@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        window.onload = function()
+        {
+            document.onclick=function(ev)
+            {
+                var oEvent = ev||event;
+                //alert(event.clientX+" "+event.clientY);    //兼容IE
+                //alert(ev.clientX+" "+ev.clientY);          //兼容FF
+
+                alert(oEvent.clientX+" "+oEvent.clientY);
+            };
+        };
+    </script>
+</head>
+<body>
+
+</body>
+</html>
