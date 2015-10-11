@@ -13,13 +13,23 @@
         }
     </style>
     <script>
+        function getPos(oEvent)
+        {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var scrollLeft = document.documentElement.scrollLeft ||document.body.scrollLeft;
+            var oLeft = oEvent.clientX + scrollLeft;
+            var oTop = oEvent.clientY + scrollTop;
+            return {x:oLeft,y:oTop};
+        }
         document.onmousemove=function(ev)
         {
             var oEvent = ev||event;
             var oDiv = document.getElementsByTagName('div')[0];
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            oDiv.style.left = oEvent.clientX +'px';
-            oDiv.style.top = oEvent.clientY + scrollTop +'px';
+            var oPos = getPos(oEvent);
+
+            oDiv.style.left = oPos['x'] +'px';
+            oDiv.style.top =oPos['y']+ 'px';
+
         };
     </script>
 </head>
