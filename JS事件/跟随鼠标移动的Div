@@ -1,0 +1,59 @@
+<html>
+<head>
+<style>
+div
+{
+	width:50px;
+	height:50px;
+	background:red;
+	position:absolute;
+}
+</style>
+<script>
+function getPos(oEvent)
+        {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var scrollLeft = document.documentElement.scrollLeft ||document.body.scrollLeft;
+            var oLeft = oEvent.clientX + scrollLeft;
+            var oTop = oEvent.clientY + scrollTop;
+            return {x:oLeft,y:oTop};
+        }
+document.onmousemove=function(ev)
+{
+	var oEvent = ev||event;
+	var oPos = getPos(oEvent);
+	var oDiv = document.getElementsByTagName('div');
+	oDiv[0].style.left = oPos.x+'px';
+	oDiv[0].style.top = oPos.y +'px';
+	
+	for(var i=oDiv.length-1;i>0;i--)
+	{
+		oDiv[i].style.left = oDiv[i-1].offsetLeft+'px';
+		oDiv[i].style.top = oDiv[i-1].offsetTop+'px';
+	}
+};
+</script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
