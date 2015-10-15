@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div
+        {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            background: #00CC33;
+        }
+    </style>
+    <script>
+        function getPos(oEvent)
+        {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var scrollLeft = document.documentElement.scrollLeft ||document.body.scrollLeft;
+            var oLeft = oEvent.clientX + scrollLeft;
+            var oTop = oEvent.clientY + scrollTop;
+            return {x:oLeft,y:oTop};
+        }
+        document.onmousemove=function(ev)
+        {
+            var oEvent = ev||event;
+            var oDiv = document.getElementsByTagName('div')[0];
+            var oPos = getPos(oEvent);
+
+            oDiv.style.left = oPos['x'] +'px';
+            oDiv.style.top =oPos['y']+ 'px';
+
+        };
+    </script>
+</head>
+<body>
+<div></div>
+</body>
+</html>

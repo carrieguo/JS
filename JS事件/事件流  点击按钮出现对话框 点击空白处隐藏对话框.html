@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1
+        {
+            width: 200px;
+            height: 200px;
+            background: #333333;
+            display: none;
+        }
+    </style>
+    <script>
+        window.onload=function()
+        {
+            var oBtn=document.getElementById('bt1');
+            var oDiv = document.getElementById('div1');
+            oBtn.onclick = function(ev)
+            {
+                var oEvent = ev||event;
+                oEvent.cancelBubble=true;   //取消冒泡
+                oDiv.style.display='block';
+            };
+            document.onclick=function()
+            {
+
+                oDiv.style.display="none";
+            };
+        };
+    </script>
+</head>
+<body>
+<input id="bt1" type="button" value="出现">
+<div id="div1"></div>
+</body>
+</html>
