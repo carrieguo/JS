@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul
+        {
+            width: 200px;
+            height: 500px;
+            background: green;
+            display: none;
+            position: absolute;
+        }
+    </style>
+    <script>
+        document.oncontextmenu = function(ev)
+        {
+            var oEvent = ev||event;
+            //return false;
+            var oUl = document.getElementsByTagName('ul')[0];
+            oUl.style.display = 'block';
+            oUl.style.left = oEvent.clientX + 'px';
+            oUl.style.top = oEvent.clientY + 'px';
+            return false; //阻止默认事件要写在函数最后
+        };
+        document.onclick = function()
+        {
+            var oUl = document.getElementsByTagName('ul')[0];
+            oUl.style.display = 'none';
+        };
+    </script>
+</head>
+<body>
+<ul>
+    <li>aaa</li>
+    <li>bbb</li>
+    <li>ccc</li>
+</ul>
+</body>
+</html>
