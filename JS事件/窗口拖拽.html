@@ -28,8 +28,25 @@
                     var oEvent = ev||event;
                     oDiv.style.left = oEvent.clientX - x +'px';
                     oDiv.style.top = oEvent.clientY - y+'px';
+                    if(oDiv.offsetLeft<0)
+                    {
+                        oDiv.style.left=0;
+                    }
+                    else if(oDiv.offsetLeft>document.documentElement.clientWidth-oDiv.offsetWidth)
+                    {
+                        oDiv.style.left=document.documentElement.clientWidth-oDiv.offsetWidth +"px";
+                    }
+                    if(oDiv.offsetTop<0)
+                    {
+                        oDiv.style.top=0;
+                    }
+                    else if(oDiv.offsetTop>document.documentElement.clientHeight-oDiv.offsetHeight)
+                    {
+                        oDiv.style.top =document.documentElement.clientHeight-oDiv.offsetHeight+'px';
+                    }
                 };
 
+                    return false;//火狐浏览器有bug，默认会拖出重影
             };
             oDiv.onmouseup = function()
             {
