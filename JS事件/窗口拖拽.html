@@ -23,13 +23,17 @@
                 var oEvent = ev||event;
                 x = oEvent.clientX - oDiv.offsetLeft;
                 y = oEvent.clientY - oDiv.offsetTop;
-                oDiv.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
+                document.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
                 {
                     var oEvent = ev||event;
                     oDiv.style.left = oEvent.clientX - x +'px';
                     oDiv.style.top = oEvent.clientY - y+'px';
                 };
 
+            };
+            oDiv.onmouseup = function()
+            {
+                document.onmousemove = null;
             };
 
         };
