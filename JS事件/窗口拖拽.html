@@ -23,40 +23,44 @@
                 var oEvent = ev||event;
                 x = oEvent.clientX - oDiv.offsetLeft;
                 y = oEvent.clientY - oDiv.offsetTop;
-                document.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
+                if(oDiv.setCapture)
                 {
-                    var oEvent = ev||event;
-                    oDiv.style.left = oEvent.clientX - x +'px';
-                    oDiv.style.top = oEvent.clientY - y+'px';
-                    if(oDiv.offsetLeft<0)
+                    oDiv.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
                     {
-                        oDiv.style.left=0;
-                    }
-                    else if(oDiv.offsetLeft>document.documentElement.clientWidth-oDiv.offsetWidth)
+                        var oEvent = ev||event;
+                        oDiv.style.left = oEvent.clientX - x +'px';
+                        oDiv.style.top = oEvent.clientY - y+'px';
+                    };
+                    oDiv.onmouseup = function()
                     {
-                        oDiv.style.left=document.documentElement.clientWidth-oDiv.offsetWidth +"px";
-                    }
-                    if(oDiv.offsetTop<0)
+                        oDiv.onmousemove = null;
+                        oDiv.onmouseup = null;
+                        oDiv.releaseCapture();
+                    };
+                    oDiv.setCapture();//IE6-8
+                }
+                else
+                {
+                    document.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
                     {
-                        oDiv.style.top=0;
-                    }
-                    else if(oDiv.offsetTop>document.documentElement.clientHeight-oDiv.offsetHeight)
+                        var oEvent = ev||event;
+                        oDiv.style.left = oEvent.clientX - x +'px';
+                        oDiv.style.top = oEvent.clientY - y+'px';
+                    };
+                    oDiv.onmouseup = function()
                     {
-                        oDiv.style.top =document.documentElement.clientHeight-oDiv.offsetHeight+'px';
-                    }
-                };
-
-                    return false;//火狐浏览器有bug，默认会拖出重影
-            };
-            oDiv.onmouseup = function()
-            {
-                document.onmousemove = null;
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                    };
+                }
+                return false;//火狐浏览器有bug，默认会拖出重影 chrome FF IE9
             };
 
         };
     </script>
 </head>
 <body>
-<div></div>
+dfjslkfjlrjsfjklr
+<div>ealkjdsldfj</div>
 </body>
 </html>
