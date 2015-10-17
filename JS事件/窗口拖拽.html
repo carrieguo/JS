@@ -4,38 +4,56 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        div
-        {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            background: green;
-        }
+        #div1 {  width: 200px;  height: 200px;  position: absolute;  background: yellow;  }
+        .box {  background: none;  border:1px dashed black;  position: absolute;  }
     </style>
     <script>
         window.onload = function()
         {
-            var oDiv = document.getElementsByTagName('div')[0];
+            var oDiv = document.getElementById('div1');
+
             var x= 0;
             var y =0;
+
             oDiv.onmousedown = function(ev)
             {
                 var oEvent = ev||event;
+
                 x = oEvent.clientX - oDiv.offsetLeft;
                 y = oEvent.clientY - oDiv.offsetTop;
+
+                var oBox = document.createElement('div');
+
+                oBox.className='box';
+                oBox.style.width=oDiv.offsetWidth-2+'px';
+                oBox.style.height=oDiv.offsetHeight-2+'px';
+
+                oBox.style.left=oDiv.offsetLeft+'px';
+                oBox.style.top=oDiv.offsetTop+'px';
+
+                document.body.appendChild(oBox);
                 if(oDiv.setCapture)
                 {
                     oDiv.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
                     {
                         var oEvent = ev||event;
-                        oDiv.style.left = oEvent.clientX - x +'px';
-                        oDiv.style.top = oEvent.clientY - y+'px';
+                        var l=oEvent.clientX- x;
+                        var t=oEvent.clientY- y;
+
+                        oBox.style.left=l+'px';
+                        oBox.style.top=t+'px';
+                       // oBox.style.left = oEvent.clientX - x +'px';
+                        //oBox.style.top = oEvent.clientY - y+'px';
                     };
                     oDiv.onmouseup = function()
                     {
+                        alert('ssss');
                         oDiv.onmousemove = null;
                         oDiv.onmouseup = null;
                         oDiv.releaseCapture();
+                        oDiv.style.left = oBox.offsetLeft+'px';
+                        oDiv.style.top = oBox.offsetTop+'px';
+                        document.body.removeChild(oBox);
                     };
                     oDiv.setCapture();//IE6-8
                 }
@@ -44,13 +62,23 @@
                     document.onmousemove = function(ev)         //onmousemove属性不论鼠标有没有按下都会执行
                     {
                         var oEvent = ev||event;
-                        oDiv.style.left = oEvent.clientX - x +'px';
-                        oDiv.style.top = oEvent.clientY - y+'px';
+                        var l=oEvent.clientX- x;
+                        var t=oEvent.clientY- y;
+
+                        oBox.style.left=l+'px';
+                        oBox.style.top=t+'px';
+                        //oBox.style.left = oEvent.clientX - x +'px';
+                        //oBox.style.top = oEvent.clientY - y+'px';
                     };
-                    oDiv.onmouseup = function()
+                    document.onmouseup = function()
                     {
                         document.onmousemove = null;
                         document.onmouseup = null;
+
+                        oDiv.style.left=oBox.offsetLeft+'px';
+                        oDiv.style.top=oBox.offsetTop+'px';
+
+                        document.body.removeChild(oBox);
                     };
                 }
                 return false;//火狐浏览器有bug，默认会拖出重影 chrome FF IE9
@@ -60,7 +88,6 @@
     </script>
 </head>
 <body>
-dfjslkfjlrjsfjklr
-<div>ealkjdsldfj</div>
+<div id="div1">ealkjdsldfj</div>
 </body>
 </html>
