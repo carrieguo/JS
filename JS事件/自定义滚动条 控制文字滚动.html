@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1 {  width: 800px; height: 50px; position:relative; background:green; margin: 0 auto;}
+        #div2 {width: 50px; height: 50px; background: red; position: absolute;}
+        #div3 {width: 500px; height: 500px; overflow: hidden; position: relative;border: 1px solid black;}
+        #div4 {position: absolute;}
+    </style>
+    <script>
+        window.onload = function()
+        {
+            var oDiv1=document.getElementById('div1');
+            var oDiv2=document.getElementById('div2');
+            var oDiv3=document.getElementById('div3');
+            var oDiv4=document.getElementById('div4');
+            oDiv2.onmousedown = function(ev)
+            {
+                var oEvent = ev||event;
+                var l = oEvent.clientX-oDiv2.offsetLeft;
+                document.onmousemove =function aa(ev)
+                {
+                    var oEvent = ev||event;
+                    oDiv2.style.left=oEvent.clientX-l+'px';
+
+                    if(oDiv2.offsetLeft<0)
+                    {
+                        oDiv2.style.left = 0 ;
+                    }
+                    else if(oDiv2.offsetLeft>750)
+                    {
+                        oDiv2.style.left= 750 + 'px';
+                    }
+                    var OST = oDiv2.offsetLeft/(oDiv1.offsetWidth-oDiv2.offsetWidth);
+                    oDiv4.style.top = -OST*(oDiv4.offsetHeight-oDiv3.offsetHeight )+ 'px';
+                    document.title = OST;
+                };
+                document.onmouseup = function()
+                {
+                    document.onmousedown = null;
+                    document.onmousemove = null;
+                };
+            };
+        };
+    </script>
+</head>
+<body>
+<div id="div1">
+    <div id="div2"></div>
+</div>
+<div id="div3">
+    <div id="div4">
+        练练练，<br>
+        练为战，<br>
+        练成那精兵才是好汉，<br>
+        练练练，<br>
+        练为战那，<br>
+        练成那个打得赢的好儿男。<br>
+        练成杀敌硬本领，<br>
+        练得豪气冲云天，<br>
+        从严从难不松劲呀，<br>
+        真打实备练练练，<br>
+        练练练！<br>
+        练练练，<br>
+        练为战，<br>
+        练练练，<br>
+        练为战，<br>
+        练成那精兵才是好汉，<br>
+        练练练，<br>
+        练为战那，<br>
+        练成那个打得赢的好儿男。<br>
+        练成杀敌硬本领，<br>
+        练得豪气冲云天，<br>
+        从严从难不松劲呀，<br>
+        真打实备练练练，<br>
+        练练练！<br>
+        练练练，<br>
+        练为战，<br>
+        练练练，<br>
+        练为战，<br>
+        练成那精兵才是好汉，<br>
+        练练练，<br>
+        练为战那，<br>
+        练成那个打得赢的好儿男。<br>
+        练成杀敌硬本领，<br>
+        练得豪气冲云天，<br>
+        从严从难不松劲呀，<br>
+        真打实备练练练，<br>
+        练练练！<br>
+        练练练，<br>
+        练为战，<br>
+        练练练，<br>
+        练为战，<br>
+        练成那精兵才是好汉，<br>
+        练练练，<br>
+        练为战那，<br>
+        练成那个打得赢的好儿男。<br>
+        练成杀敌硬本领，<br>
+        练得豪气冲云天，<br>
+        从严从难不松劲呀，<br>
+        真打实备练练练，<br>
+        练练练！<br>
+        练练练，<br>
+        练为战，<br>
+        练练练，<br>
+        练为战，<br>
+        练成那精兵才是好汉，<br>
+        练练练，<br>
+        练为战那，<br>
+        练成那个打得赢的好儿男。<br>
+        练成杀敌硬本领，<br>
+        练得豪气冲云天，<br>
+        从严从难不松劲呀，<br>
+        真打实备练练练，<br>
+        练练练！<br>
+        练练练，<br>
+        练为战，<br>
+    </div>
+</div>
+</body>
+</html>
